@@ -7,6 +7,6 @@ services:
   build: .
   environment:
    - RABBITMQ_HOSTNAME=rabbitmq
-   - RABBITMQ_EXCHANGE=steemit
+   - RABBITMQ_EXCHANGE=amq.topic
   volumes:
    - ./credentials.py:/app/mycredentials.py
