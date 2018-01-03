@@ -1,13 +1,6 @@
 version: '3.1'
 services:
  
- away:
-  restart: always
-  build: .
-  command: python away-trust-friends-bot.py
-  volumes:
-   - ./credentials.py:/app/mycredentials.py
-
  amqp:
   restart: always
   build: .
