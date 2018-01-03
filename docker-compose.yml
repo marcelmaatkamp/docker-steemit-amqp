@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+ 
+ away:
+  restart: always
+  build: .
+  command: python away-trust-friends-bot.py
+  volumes:
+   - ./credentials.py:/app/mycredentials.py
+
+ amqp:
+  restart: always
+  build: .
+  command: python amqp.py
+  environment:
+   - RABBITMQ_HOSTNAME=rabbitmq
+   - RABBITMQ_EXCHANGE=steemit
+  # extra_hosts:
+  #  - "rabbitmq:172.20.0.5"
+  volumes:
+   - ./credentials.py:/app/mycredentials.py
