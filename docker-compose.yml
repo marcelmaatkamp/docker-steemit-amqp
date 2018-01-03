@@ -1,12 +1,27 @@
 version: '3.1'
 services:
- 
- amqp:
+
+ rabbitmq:
+  image: marcelmaatkamp/rabbitmq-mqtt-ldap
   restart: always
-  image: marcelmaatkamp/steemit-amqp
-  build: .
+  hostname: rabbitmq
   environment:
-   - RABBITMQ_HOSTNAME=rabbitmq
-   - RABBITMQ_EXCHANGE=amq.topic
+   RABBITMQ_NODENAME: rabbitmq@rabbitmq
   volumes:
-   - ./credentials.py:/app/mycredentials.py
+   - rabbitmq:/var/lib/rabbitmq/mnesia
+  logging:
+   options:
+    max-size: 50m
+ 
+  amqp:
+   restart: always
+   image: marcelmaatkamp/steemit-amqp
+   build: .
+   environment:
+    - RABBITMQ_HOSTNAME=rabbitmq
+    - RABBITMQ_EXCHANGE=amq.topic
+   volumes:
+    - ./credentials.py:/app/mycredentials.py
+    
+volumes:
+ rabbitmq:
