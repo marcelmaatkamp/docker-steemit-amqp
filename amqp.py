@@ -3,7 +3,7 @@ from steempersist import SteemPersist
 from steemutils import must_vote
 import mycredentials
 import steem
-import syslog
+import fakesyslog as syslog
 
 import pika
 import json
