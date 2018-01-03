@@ -13,5 +13,6 @@ friends=["friend1","friend2"]
 # Start ingest
 
 ```
+$ docker-compose up -d rabbitmq
 $ docker-compose run amqp
 ```
