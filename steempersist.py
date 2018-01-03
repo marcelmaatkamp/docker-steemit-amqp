@@ -4,7 +4,7 @@ import json
 import dateutil.parser
 import datetime
 import time
-import syslog
+import fakesyslog as syslog
 import hashlib
 p = None
 
