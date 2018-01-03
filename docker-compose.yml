@@ -13,15 +13,15 @@ services:
    options:
     max-size: 50m
  
-  amqp:
-   restart: always
-   image: marcelmaatkamp/steemit-amqp
-   build: .
-   environment:
-    - RABBITMQ_HOSTNAME=rabbitmq
-    - RABBITMQ_EXCHANGE=amq.topic
-   volumes:
-    - ./credentials.py:/app/mycredentials.py
+ amqp:
+  restart: always
+  image: marcelmaatkamp/steemit-amqp
+  build: .
+  environment:
+   - RABBITMQ_HOSTNAME=rabbitmq
+   - RABBITMQ_EXCHANGE=amq.topic
+  volumes:
+   - ./credentials.py:/app/mycredentials.py
     
 volumes:
  rabbitmq:
