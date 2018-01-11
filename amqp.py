@@ -16,9 +16,9 @@ class AMQP:
         # print(event)
         channel.basic_publish(exchange=os.environ.get('RABBITMQ_EXCHANGE'), routing_key='steemit.'+event['type'], body=json.dumps(event['event']))
 
-keys=os.environ.get('steemit.account.key.active')
-account=os.environ.get('steemit.account.name')
-friends=os.environ.get('steemit.friends')
+keys=os.environ.get('STEEMIT_ACCOUNT_ACTIVE_KEY')
+account=os.environ.get('STEEMIT_ACCOUNT_NAME')
+friends=[]
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=os.environ.get('RABBITMQ_HOSTNAME')))
 channel = connection.channel()
