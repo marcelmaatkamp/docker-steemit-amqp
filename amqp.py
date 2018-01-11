@@ -12,15 +12,17 @@ class AMQP:
     def __init__(self,pers,channel):
         self.pers=pers
         self.channel=channel
+        self.exchange=self.channel.exchange_declare(exchange=os.environ.get('RABBITMQ_EXCHANGE'),exchange_type='topic')
     def other(self,time,event):	
         # print(event)
-        channel.basic_publish(exchange=os.environ.get('RABBITMQ_EXCHANGE'), routing_key='steemit.'+event['type'], body=json.dumps(event['event']))
+        channel.basic_publish(exchange=exchange, routing_key='steemit.'+event['type'], body=json.dumps(event['event']))
 
 keys=os.environ.get('STEEMIT_ACCOUNT_ACTIVE_KEY')
 account=os.environ.get('STEEMIT_ACCOUNT_NAME')
 friends=[]
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=os.environ.get('RABBITMQ_HOSTNAME')))
+
 channel = connection.channel()
 
 pers = SteemPersist("amqp")
