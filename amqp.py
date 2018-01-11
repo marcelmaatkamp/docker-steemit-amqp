@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 from steempersist import SteemPersist
 from steemutils import must_vote
-import mycredentials
 import steem
 import fakesyslog as syslog
 
@@ -16,6 +15,10 @@ class AMQP:
     def other(self,time,event):	
         # print(event)
         channel.basic_publish(exchange=os.environ.get('RABBITMQ_EXCHANGE'), routing_key='steemit.'+event['type'], body=json.dumps(event['event']))
+
+keys=os.environ.get('steemit.account.key.active')
+account=os.environ.get('steemit.account.name')
+friends=os.environ.get('steemit.friends')
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(host=os.environ.get('RABBITMQ_HOSTNAME')))
 channel = connection.channel()
