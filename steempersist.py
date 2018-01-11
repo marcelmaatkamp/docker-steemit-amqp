@@ -143,7 +143,8 @@ class SteemPersist:
         self.name=name
         syslog.openlog(name,syslog.LOG_PID)
         syslog.syslog("START")
-        self.steemd = steem.steemd.Steemd()
+        steemd_nodes = ['http://steemd.pevo.science',]
+        self.steemd = steem.steemd.Steemd(nodes=steemd_nodes)
         self.blockchain = steem.blockchain.Blockchain(self.steemd)
         self.handlers = dict()
         self.handled = set()
