@@ -7,4 +7,4 @@ RUN apk add --update build-base openssl-dev &&\
 WORKDIR /app
 COPY *.py /app/
 
-CMD ["python","amqp.py"]
+CMD ["python", "-u", "amqp.py"]
